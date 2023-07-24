@@ -11,8 +11,6 @@ type BlogPostProps = {
 export default async function BlogPost({ params: { slug } }: BlogPostProps) {
   const { content, frontmatter } = await getPost(slug);
 
-  console.log(frontmatter);
-
   return (
     <>
       <header className="space-y-2">
