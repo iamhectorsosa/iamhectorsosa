@@ -30,7 +30,7 @@ export const Footer = () => {
             <a
               key={href}
               className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
-              href="/github"
+              href={href}
             >
               <li>{label}</li>
               <ExternalLinkIcon className="w-5 h-5" />
