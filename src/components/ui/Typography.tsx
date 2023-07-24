@@ -118,7 +118,7 @@ const ProseP = forwardRef<HTMLParagraphElement, ComponentPropsWithoutRef<"p">>(
     const { children, className, ...otherProps } = props;
     return (
       <p
-        className={cn("text-lg font-light leading-loose", className)}
+        className={cn("font-light leading-loose text-neutral-700", className)}
         ref={ref}
         {...otherProps}
       >
@@ -203,7 +203,7 @@ const ProseUL = forwardRef<HTMLUListElement, ComponentPropsWithoutRef<"ul">>(
     const { children, ...otherProps } = props;
     return (
       <ul
-        className="list-inside list-disc text-lg font-light leading-loose marker:text-neutral-500 [&>li>p]:inline"
+        className="list-inside list-disc font-light leading-loose marker:text-neutral-500 [&>li>p]:inline"
         ref={ref}
         {...otherProps}
       >
@@ -245,7 +245,7 @@ const ProsePre = forwardRef<HTMLPreElement, ComponentPropsWithoutRef<"pre">>(
     const { children, ...otherProps } = props;
     return (
       <pre
-        className="border border-neutral-300 rounded text-[15px] leading-6 py-5 overflow-x-scroll [&>code]:grid [&>code>span]:px-5"
+        className="border border-neutral-300 rounded text-[14px] py-5 overflow-x-scroll [&>code]:grid [&>code>span]:px-5"
         ref={ref}
         {...otherProps}
       >

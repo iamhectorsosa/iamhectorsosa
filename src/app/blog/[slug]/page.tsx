@@ -1,6 +1,19 @@
 import Image from "next/image";
 import { getPost, getPosts } from "@lib/mdx";
 import dayjs from "dayjs";
+import { Metadata } from "next";
+import { baseMetadata } from "@config/meta";
+
+export async function generateMetadata({
+  params: { slug },
+}: BlogPostProps): Promise<Metadata> {
+  const { frontmatter } = await getPost(slug);
+  return {
+    ...baseMetadata,
+    title: frontmatter.title,
+    description: frontmatter.description,
+  };
+}
 
 type BlogPostProps = {
   params: {
@@ -34,7 +47,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
         <h1 className="text-5xl font-semibold tracking-tight group-hover:text-neutral-600">
           {frontmatter.title}
         </h1>
-        <p className="leading-7 line-clamp-2 text-neutral-600 pt-2">
+        <p className="leading-7 line-clamp-2 text-neutral-500 pt-2">
           {frontmatter.description}
         </p>
       </header>
@@ -49,7 +62,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
           src={
             frontmatter?.github
               ? `http://avatars.githubusercontent.com/${frontmatter.github}`
-              : "https://github.com/identicons/webscopeio.png"
+              : "https://github.com/identicons/iamhectorsosa.png"
           }
           className="overflow-hidden rounded-full"
         />

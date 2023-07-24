@@ -1,7 +1,15 @@
+import { BlogItem } from "@components/BlogItem";
+import { baseMetadata } from "@config/meta";
 import { getPosts } from "@lib/mdx";
-import dayjs from "dayjs";
 import { ArrowLeftIcon } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  ...baseMetadata,
+  title: "Blog",
+  description: "From the blog",
+};
 
 export default async function Home() {
   const posts = await getPosts();
@@ -14,19 +22,13 @@ export default async function Home() {
         </h3>
         <div className="space-y-6">
           {posts.map(({ id, date, title, description, slug }) => (
-            <Link className="block group" href={`blog/${slug}`} key={id}>
-              <header className="space-y-2">
-                <time className="text-sm text-neutral-500" dateTime={date}>
-                  {dayjs(date).format("dddd D MMMM YY")}
-                </time>
-                <h1 className="text-xl font-semibold tracking-tight group-hover:text-neutral-600">
-                  {title}
-                </h1>
-                <p className="leading-7 line-clamp-2 text-neutral-600">
-                  {description}
-                </p>
-              </header>
-            </Link>
+            <BlogItem
+              key={id}
+              slug={slug}
+              date={date}
+              title={title}
+              description={description}
+            />
           ))}
         </div>
         <Link

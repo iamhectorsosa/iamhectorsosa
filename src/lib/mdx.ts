@@ -23,7 +23,7 @@ import rehypeSlug from "rehype-slug";
 import { z } from "zod";
 
 // ⚙️ Config settings
-const blogDir = "src/content/blog";
+const blogDir = "src/blog";
 const fileExtension = ".mdx";
 
 // ⚙️ Type definitions
@@ -162,4 +162,17 @@ export async function getPost(
     lastUpdated: ctime.toISOString(),
   });
   return { content, frontmatter };
+}
+
+export async function compileMarkdown(source: string) {
+  return await compileMDX({
+    source,
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        rehypePlugins: [rehypeSlug, [rehypePrettyCode, options]],
+      },
+    },
+    components,
+  });
 }

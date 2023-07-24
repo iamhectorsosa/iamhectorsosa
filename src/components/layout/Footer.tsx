@@ -1,6 +1,21 @@
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
 
+const footerItems = [
+  {
+    href: "/github",
+    label: "Github",
+  },
+  {
+    href: "/twitter",
+    label: "Twitter",
+  },
+  {
+    href: "/email",
+    label: "Email",
+  },
+];
+
 export const Footer = () => {
   return (
     <div className="border-t border-neutral-200 flex items-center justify-center">
@@ -11,27 +26,16 @@ export const Footer = () => {
           </h1>
         </Link>
         <ul className="flex md:items-center flex-col md:flex-row gap-x-4 gap-y-2 mt-1">
-          <a
-            className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
-            href="/github"
-          >
-            <li>GitHub</li>
-            <ExternalLinkIcon className="w-5 h-5" />
-          </a>
-          <a
-            className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
-            href="/twitter"
-          >
-            <li>Twitter</li>
-            <ExternalLinkIcon className="w-5 h-5" />
-          </a>
-          <a
-            className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
-            href="/email"
-          >
-            <li>Email</li>
-            <ExternalLinkIcon className="w-5 h-5" />
-          </a>
+          {footerItems.map(({ href, label }) => (
+            <a
+              key={href}
+              className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
+              href="/github"
+            >
+              <li>{label}</li>
+              <ExternalLinkIcon className="w-5 h-5" />
+            </a>
+          ))}
         </ul>
       </nav>
     </div>
