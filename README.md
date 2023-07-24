@@ -1,20 +1,12 @@
-# Welcome!
+# Welcome
 
-Thanks for stopping by! My name is Hector and I am a Software Engineer from Honduras 🇭🇳, currently based in Prague 🇨🇿. I specialize in building scalable user interfaces with a focus on accessibility, design and high-quality implementation.
+Msc. Project Management and UI Engineer based in Prague Czech Republic but <a href="https://youtu.be/KPH9Al69680">Made in Honduras</a>.
 
-I'm currently working as a Senior React/TypeScript Developer at [Webscope](https://webscope.io).
+Currently working as a Senior React TypeScript Developer at <a href="https://webscope.io"> Webscope </a>.
 
-## Technology Stack
+### Contact
 
-[hectorsosa.me](https://hectorsosa.me) is currently built using:
-- [TypeScript](https://www.typescriptlang.org/)
-- [React](https://react.dev/)
-- [Next](https://nextjs.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [UnoCSS](https://unocss.dev/)
-- [MDX](https://mdxjs.com/)
-
-**Contact Information**:
-
-- E-mail: [hello@hectorsosa.me](https://hectorsosa.me/email)
 - Website: https://hectorsosa.me
+- GitHub: [@iamhectorsosa](https://hectorsosa.me/github)
+- Twitter: [@iamhectorsosa](https://hectorsosa.me/twitter)
+- E-mail: [hello@hectorsosa.me](https://hectorsosa.me/email)

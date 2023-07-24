@@ -1,0 +1,70 @@
+---
+title: Learn the Basics - GitHub's CLI
+description: GitHub CLI is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line.
+date: "2023-07-24T00:00:00Z"
+github: iamhectorsosa
+---
+
+GitHub CLI, or `gh`, is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line. `gh` is available via [Homebrew](https://brew.sh/) by running the command `brew install gh`.
+
+You are working in one of your projects, where you will create (a) an _issue_, (b) a _branch_ and (c) a _pull request_ to (d) _merge_ changes into your main production branch. We will explore these `gh` commands straight from its [Manual](https://cli.github.com/manual/gh).
+
+## Creating an issue
+
+[GitHub Issues](https://docs.github.com/en/issues) helps you to track ideas, feedback, tasks, bugs and plan for your work right where development takes place.
+
+```bash
+## Other available flags
+## -a --assignee <login> // Use "@me" to self-assign
+## -l --label <name> // Check your pre-defined labels
+
+$ gh issue create --t "My new issue"  --b "Here are more details."
+
+## Add the web flag at the end to open the draft before submitting
+## -w --web
+```
+
+## Creating a branch to work on an issue
+
+If you used the `--web` flag, you can create a branch to work on an issue directly from the issue page by clicking under **Development > Create a branch**. Once the branch is created, to start working, you can checkout the branch in your local repository:
+
+```bash
+$ git fetch origin
+$ git checkout <branch_name>
+
+## Can verify by running
+$ git branch
+```
+
+This is incredibly useful and convenient because this links any pull request created for that branch, where successfully merging that PR will replace the relationship (from branch to PR) and automatically close the issue.
+
+## Creating a pull request to review your work
+
+You finished and committed your work. now you're ready to create a PR. Pull requests (PR) lets you discuss and review potential changes before (if _'LGTM'_) merging them into production. I would recommend creating your PR _interactively_. For more information on the available flags, visit [CLI Manual: PR Create](https://cli.github.com/manual/gh_pr_create)
+
+```bash
+## I would recommend creating your PR Interactively
+## This will give you access to nano to write better notes
+$ gh pr create
+? Title <title>
+? Body [(e) to launch nano, enter to skip]
+## After editing the body it will display as <Received>
+
+## Once created, you can view and access the PR by running:
+$ gh pr list
+$ gh pr <number> --web
+```
+
+## Merging your changes to production
+
+Once the changes you've made on your head branch are ready to be merged into the main (base) branch, you are ready to push your code to production.
+
+```bash
+## --delete-branch: will delete the local and remote branch after merge
+## --merge: will merge the commits with the base branch
+$ gh pr merge <number> --body <text> --delete-branch --merge
+
+# If no argument, the PR that belongs to the current branch is selected.
+```
+
+Immediately after this, (a) your _issue_ will be marked as closed, (b) the local and remote _development branch_ will be deleted and your (c) commit change _merged_ into the main branch. For more information on visit GitHub's documentation: [Collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
