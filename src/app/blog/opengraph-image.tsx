@@ -15,18 +15,13 @@ export const size = {
 
 export const contentType = "image/png";
 
-const groteskRegular = () =>
-  fetch(
+export default async function Image() {
+  const groteskRegular = await fetch(
     new URL("./../assets/fonts/SchibstedGrotesk-Regular.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
-const groteskSemibold = () =>
-  fetch(
+  const groteskSemibold = await fetch(
     new URL("./../assets/fonts/SchibstedGrotesk-Semibold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
-
-export default async function Image() {
-  const groteskRegularData = await groteskRegular();
-  const groteskSemiboldData = await groteskSemibold();
 
   return new ImageResponse(
     (
@@ -85,13 +80,13 @@ export default async function Image() {
       fonts: [
         {
           name: "Grotesk",
-          data: groteskRegularData,
+          data: groteskRegular,
           style: "normal",
           weight: 400,
         },
         {
           name: "Grotesk",
-          data: groteskSemiboldData,
+          data: groteskSemibold,
           style: "normal",
           weight: 600,
         },
