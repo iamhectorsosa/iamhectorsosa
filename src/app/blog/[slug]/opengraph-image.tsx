@@ -16,18 +16,18 @@ export const size = {
 
 export const contentType = "image/png";
 
+const groteskRegular = fs.promises.readFile(
+  path.join("./src/app/assets/fonts/SchibstedGrotesk-Regular.ttf")
+);
+const groteskSemibold = fs.promises.readFile(
+  path.join("./src/app/assets/fonts/SchibstedGrotesk-Semibold.ttf")
+);
+
 export default async function Image({
   params: { slug },
 }: {
   params: { slug: string };
 }) {
-  const groteskRegular = await fs.promises.readFile(
-    path.join("./src/app/assets/fonts/SchibstedGrotesk-Regular.ttf")
-  );
-  const groteskSemibold = await fs.promises.readFile(
-    path.join("./src/app/assets/fonts/SchibstedGrotesk-Semibold.ttf")
-  );
-
   const { frontmatter } = await getPost(slug);
 
   const title = frontmatter.title;
@@ -89,13 +89,13 @@ export default async function Image({
       fonts: [
         {
           name: "Grotesk",
-          data: groteskRegular,
+          data: await groteskRegular,
           style: "normal",
           weight: 400,
         },
         {
           name: "Grotesk",
-          data: groteskSemibold,
+          data: await groteskSemibold,
           style: "normal",
           weight: 600,
         },
