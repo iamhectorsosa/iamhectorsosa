@@ -19,10 +19,10 @@ export const contentType = "image/png";
 
 export default async function Image() {
   const groteskRegular = await fs.promises.readFile(
-    path.join("./public/assets/fonts/SchibstedGrotesk-Regular.ttf")
+    path.join("./assets/fonts/SchibstedGrotesk-Regular.ttf")
   );
   const groteskSemibold = await fs.promises.readFile(
-    path.join("./public/assets/fonts/SchibstedGrotesk-Semibold.ttf")
+    path.join("./assets/fonts/SchibstedGrotesk-Semibold.ttf")
   );
 
   return new ImageResponse(
