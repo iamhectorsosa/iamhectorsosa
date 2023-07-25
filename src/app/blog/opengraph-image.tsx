@@ -1,13 +1,11 @@
 import { ImageResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 
 const basePath = "hectorsosa.me/";
 
 const title = "Blog";
 const param = "blog";
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 export const alt = "Blog";
 export const size = {
@@ -18,12 +16,12 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  const groteskRegular = await fs.promises.readFile(
-    path.join("./assets/fonts/SchibstedGrotesk-Regular.ttf")
-  );
-  const groteskSemibold = await fs.promises.readFile(
-    path.join("./assets/fonts/SchibstedGrotesk-Semibold.ttf")
-  );
+  const groteskRegular = await fetch(
+    new URL("./../assets/fonts/SchibstedGrotesk-Regular.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+  const groteskSemibold = await fetch(
+    new URL("./../assets/fonts/SchibstedGrotesk-Semibold.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
     (
