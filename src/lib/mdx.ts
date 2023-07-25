@@ -18,7 +18,10 @@ import {
   compileMDX,
 } from "next-mdx-remote/rsc";
 import { join } from "path";
-import rehypePrettyCode, { Options } from "rehype-pretty-code";
+import remarkToc, { Options as RemarkTocOptions } from "remark-toc";
+import rehypePrettyCode, {
+  Options as RehypePrettyCodeOptions,
+} from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import { z } from "zod";
 
@@ -76,9 +79,15 @@ function getFilename(slug: string): string {
   return filename + fileExtension;
 }
 
+// ⬇️ remark toc Options
+
+const remarkTocOptions: RemarkTocOptions = {
+  heading: "On this page",
+};
+
 // ⬇️ rehypePrettyCode Options
 
-const options: Options = {
+const rehypePrettyCodeOptions: RehypePrettyCodeOptions = {
   theme: "css-variables",
 };
 
@@ -143,7 +152,11 @@ export async function getPost(
       options: {
         parseFrontmatter: true,
         mdxOptions: {
-          rehypePlugins: [rehypeSlug, [rehypePrettyCode, options]],
+          remarkPlugins: [[remarkToc, remarkTocOptions]],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+          ],
         },
       },
       components,
@@ -170,7 +183,10 @@ export async function compileMarkdown(source: string) {
     options: {
       parseFrontmatter: false,
       mdxOptions: {
-        rehypePlugins: [rehypeSlug, [rehypePrettyCode, options]],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypePrettyCode, rehypePrettyCodeOptions],
+        ],
       },
     },
     components,

@@ -20,7 +20,7 @@ const ProseH1 = forwardRef<HTMLHeadingElement, ComponentPropsWithoutRef<"h1">>(
       <h1
         id={id}
         className={cn(
-          "scroll-m-20 text-4xl font-semibold tracking-tight",
+          "scroll-m-9 text-4xl font-semibold tracking-tight",
           className
         )}
         ref={ref}
@@ -45,7 +45,7 @@ const ProseH2 = forwardRef<HTMLHeadingElement, ComponentPropsWithoutRef<"h2">>(
       <h2
         id={id}
         className={cn(
-          "scroll-m-20 text-3xl font-semibold tracking-tight",
+          "scroll-m-9 text-3xl font-semibold tracking-tight",
           className
         )}
         ref={ref}
@@ -70,7 +70,7 @@ const ProseH3 = forwardRef<HTMLHeadingElement, ComponentPropsWithoutRef<"h3">>(
       <h3
         id={id}
         className={cn(
-          "scroll-m-20 text-2xl font-semibold tracking-tight",
+          "scroll-m-9 text-2xl font-semibold tracking-tight",
           className
         )}
         ref={ref}
@@ -95,7 +95,7 @@ const ProseH4 = forwardRef<HTMLHeadingElement, ComponentPropsWithoutRef<"h4">>(
       <h4
         id={id}
         className={cn(
-          "scroll-m-20 text-xl font-semibold tracking-tight",
+          "scroll-m-9 text-xl font-semibold tracking-tight",
           className
         )}
         ref={ref}
