@@ -17,10 +17,10 @@ export const contentType = "image/png";
 
 export default async function Image() {
   const groteskRegular = await fetch(
-    new URL("./../assets/fonts/SchibstedGrotesk-Regular.ttf", import.meta.url)
+    new URL("./../SchibstedGrotesk-Regular.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
   const groteskSemibold = await fetch(
-    new URL("./../assets/fonts/SchibstedGrotesk-Semibold.ttf", import.meta.url)
+    new URL("./../SchibstedGrotesk-Semibold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(

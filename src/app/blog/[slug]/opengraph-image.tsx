@@ -16,13 +16,6 @@ export const size = {
 
 export const contentType = "image/png";
 
-const groteskRegular = fs.promises.readFile(
-  path.join("./src/app/assets/fonts/SchibstedGrotesk-Regular.ttf")
-);
-const groteskSemibold = fs.promises.readFile(
-  path.join("./src/app/assets/fonts/SchibstedGrotesk-Semibold.ttf")
-);
-
 export default async function Image({
   params: { slug },
 }: {
@@ -31,6 +24,13 @@ export default async function Image({
   const { frontmatter } = await getPost(slug);
 
   const title = frontmatter.title;
+
+  const groteskRegular = fs.promises.readFile(
+    path.join("./src/app/SchibstedGrotesk-Regular.ttf")
+  );
+  const groteskSemibold = fs.promises.readFile(
+    path.join("./src/app/SchibstedGrotesk-Semibold.ttf")
+  );
 
   return new ImageResponse(
     (
