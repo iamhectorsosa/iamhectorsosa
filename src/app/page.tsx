@@ -1,9 +1,8 @@
 import { BlogItem } from "@components/BlogItem";
+import { NavigationLink } from "@components/NavigationLink";
 import { baseMetadata } from "@config/meta";
 import { compileMarkdown, getPosts } from "@lib/mdx";
-import { ArrowRightIcon } from "lucide-react";
 import { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = baseMetadata;
 
@@ -17,7 +16,7 @@ export default async function Home() {
     <div className="space-y-12">
       <section className="space-y-3">{bio}</section>
       <section className="space-y-6">
-        <h3 className="text-2xl font-semibold tracking-tight text-neutral-800">
+        <h3 className="text-2xl font-semibold tracking-tight">
           Latest blog posts
         </h3>
         <div className="space-y-6">
@@ -31,13 +30,7 @@ export default async function Home() {
             />
           ))}
         </div>
-        <Link
-          className="flex items-center gap-1 text-neutral-700 hover:text-neutral-900"
-          href="/blog"
-        >
-          <p>Go to all blog posts</p>
-          <ArrowRightIcon className="w-4 h-4" />
-        </Link>
+        <NavigationLink label="Go to all blog posts" href="/blog" />
       </section>
     </div>
   );

@@ -27,7 +27,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
   return (
     <>
       <header className="space-y-2">
-        <div className="flex items-center gap-x-2 text-sm text-neutral-500">
+        <div className="flex items-center gap-x-2 text-sm text-muted-foreground">
           <time dateTime={frontmatter.date}>
             {dayjs(frontmatter.date).format("dddd D MMMM YY")}
           </time>
@@ -44,10 +44,10 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
             </a>
           </div>
         </div>
-        <h1 className="text-5xl font-semibold tracking-tight group-hover:text-neutral-600">
+        <h1 className="text-5xl font-semibold tracking-tight">
           {frontmatter.title}
         </h1>
-        <p className="leading-7 line-clamp-2 text-neutral-500 pt-2">
+        <p className="leading-7 line-clamp-2 text-muted-foreground pt-2">
           {frontmatter.description}
         </p>
       </header>
@@ -66,7 +66,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
           }
           className="overflow-hidden rounded-full"
         />
-        <div className="grid gap-1 text-neutral-500">
+        <div className="grid gap-1 text-muted-foreground">
           <div className="space-x-1">
             <span>Written by</span>
             <a

@@ -118,7 +118,7 @@ const ProseP = forwardRef<HTMLParagraphElement, ComponentPropsWithoutRef<"p">>(
     const { children, className, ...otherProps } = props;
     return (
       <p
-        className={cn("font-light leading-loose text-neutral-700", className)}
+        className={cn("font-light leading-loose", className)}
         ref={ref}
         {...otherProps}
       >
@@ -150,7 +150,7 @@ const ProseAnchor = forwardRef<
   const { children, ...otherProps } = props;
   return (
     <a
-      className="font-semibold text-neutral-900 underline underline-offset-8 transition-colors hover:text-neutral-700"
+      className="font-semibold underline underline-offset-8 transition-colors hover:opacity-80"
       ref={ref}
       {...otherProps}
     >
@@ -203,7 +203,7 @@ const ProseUL = forwardRef<HTMLUListElement, ComponentPropsWithoutRef<"ul">>(
     const { children, ...otherProps } = props;
     return (
       <ul
-        className="list-inside list-disc font-light leading-loose marker:text-neutral-500 [&>li>p]:inline"
+        className="list-inside list-disc font-light leading-loose marker:text-muted-foreground [&>li>p]:inline"
         ref={ref}
         {...otherProps}
       >
@@ -229,7 +229,7 @@ const ProseInlineCode = forwardRef<
   }
   return (
     <code
-      className="whitespace-nowrap rounded bg-neutral-200 text-neutral-800 py-[0.2rem] px-[0.3rem] font-mono font-medium"
+      className="whitespace-nowrap rounded bg-muted py-[0.2rem] px-[0.3rem] font-mono font-medium"
       ref={ref}
       {...otherProps}
     >
@@ -245,7 +245,7 @@ const ProsePre = forwardRef<HTMLPreElement, ComponentPropsWithoutRef<"pre">>(
     const { children, ...otherProps } = props;
     return (
       <pre
-        className="border border-neutral-300 rounded text-[14px] py-5 overflow-x-scroll [&>code]:grid [&>code>span]:px-5"
+        className="border border-border rounded text-[14px] py-5 overflow-x-scroll [&>code]:grid [&>code>span]:px-5"
         ref={ref}
         {...otherProps}
       >

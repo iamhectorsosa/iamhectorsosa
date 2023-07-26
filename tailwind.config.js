@@ -8,6 +8,15 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        background: "hsl(var(--background) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
+        muted: {
+          DEFAULT: "hsl(var(--muted) / <alpha-value>)",
+          foreground: "hsl(var(--muted-foreground) / <alpha-value>)",
+        },
+        border: "hsl(var(--border) / <alpha-value>)",
+      },
       fontFamily: {
         sans: ["var(--font-grotesk)"],
         mono: ["var(--font-mono)"],

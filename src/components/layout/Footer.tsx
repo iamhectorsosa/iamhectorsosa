@@ -18,7 +18,7 @@ const footerItems = [
 
 export const Footer = () => {
   return (
-    <div className="border-t border-neutral-200 flex items-center justify-center">
+    <div className="border-t border-border flex items-center justify-center">
       <nav className="w-full max-w-6xl pb-12 pt-8 flex flex-col md:flex-row justify-between">
         <Link href="/">
           <h1 className="flex items-center font-semibold text-xl tracking-tight gap-2">
@@ -29,7 +29,7 @@ export const Footer = () => {
           {footerItems.map(({ href, label }) => (
             <a
               key={href}
-              className="text-neutral-700 hover:text-neutral-900 flex gap-x-2 items-center"
+              className="text-muted-foreground hover:text-foreground flex gap-x-2 items-center"
               href={href}
             >
               <li>{label}</li>
