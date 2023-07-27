@@ -1,0 +1,58 @@
+---
+title: Mapping Request Paths using Next
+description: What's the difference between rewrites and redirects, and how to use them?
+date: "2022-09-30T00:00:00Z"
+github: iamhectorsosa
+---
+
+Inside your Next application, your `next.config.js` file is a regular Node module used by the server and build phases where you can configure rewrites and redirects for your application. What's the difference between them?
+
+- [Rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) allow you to map a request path to a different destination as a URL proxy (masking the destination path, without changing the User's location at all).
+- In contrast, [redirects](https://nextjs.org/docs/api-reference/next.config.js/redirects) will reroute you to a new page fully disclosing the destination URL.
+
+Both of them are _async_ functions that return at least an array of objects that require the following key-value pairs: `source`, `destination`, `permanent` (only for _redirects_). Rewrites can be incredibly useful to temporarily map old paths: `/old-blog/:slug` to `/new-blog/:slug` ensuring there are no broken links in your application. However, let's say if you'd want to map `/github` to your GH profile. Here, you'd use a _redirect_ instead.
+
+```js
+/*** `next.config.js` ***/
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/github",
+        // `source` type `String` - is the incoming request path pattern
+        destination: "https://github.com/iamhectorsosa",
+        // `destination` type `String` - is the path you want to route to
+        permanent: true,
+        // `permanent` type `Boolean` Only for Redirects
+        // `true` will use 308 to cache the redirect
+        // `false` will use 307 as temporary
+      },
+    ];
+  },
+};
+```
+
+Vercel also offers a solution for _redirects_ and _rewrites_ within their `vercel.json` [Project config](https://vercel.com/docs/project-configuration) file. Here, [redirects](https://vercel.com/docs/project-configuration#project-configuration/redirects) and [rewrites](https://vercel.com/docs/project-configuration#project-configuration/rewrites) are **framework agnostic**. You can use them with any framework supported on their platform. However, in case of a Next.js application, Vercel recommends **framework level redirects** as they do have precedence over platform level redirects. Here's [Lee Rob](https://twitter.com/leeerob)'s [project config file](https://github.com/leerob/leerob.io/blob/main/vercel.json).
+
+## What about subdomains?
+
+With subdomains such as `subdomain.domain.com`, Vercel explains this incredibly easy (here's their [redirecting subdomain guide](https://vercel.com/guides/can-i-redirect-from-a-subdomain-to-a-subpath)). In short, let's say you want to rewrite `app.acme.com` to `acme.com/app`, you'll need to configure a rewrite making use of the `has` field.
+
+```js
+/*** `vercel.json` ***/
+{
+  "rewrites": [
+    // Requests to app.acme.com, will be rewritten to acme.com/app.
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.acme.com"
+        }
+      ],
+      "destination": "/app/:path*"
+    }
+  ]
+}
+```

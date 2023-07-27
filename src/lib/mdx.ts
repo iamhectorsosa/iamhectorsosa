@@ -83,6 +83,7 @@ function getFilename(slug: string): string {
 
 const remarkTocOptions: RemarkTocOptions = {
   heading: "On this page",
+  maxDepth: 2,
 };
 
 // ⬇️ rehypePrettyCode Options
