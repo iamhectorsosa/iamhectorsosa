@@ -1,3 +1,4 @@
+import { Contributions } from "@components/Contributions";
 import { BlogItem } from "@components/BlogItem";
 import { NavigationLink } from "@components/NavigationLink";
 import { TechStack } from "@components/TechStack";
@@ -18,6 +19,9 @@ export default async function Home() {
       <section className="space-y-3">
         <h3 className="text-2xl font-semibold tracking-tight">About</h3>
         {bio}
+      </section>
+      <section className="space-y-3">
+        <Contributions />
       </section>
       <section className="space-y-6">
         <h3 className="text-2xl font-semibold tracking-tight">
