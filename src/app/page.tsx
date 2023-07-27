@@ -9,7 +9,7 @@ export const metadata: Metadata = baseMetadata;
 export default async function Home() {
   const posts = await getPosts();
   const { content: bio } = await compileMarkdown(`
-  Msc. Project Management and UI Engineer based in Prague Czech Republic but [Made in Honduras](https://youtu.be/KPH9Al69680). Currently working as a Senior React/TypeScript Developer at [Webscope](https://webscope.io)
+  Msc. Project Management and UI Engineer based in Prague Czech Republic but made in [Honduras](https://youtu.be/UbGs5shZyxc). Currently working as a Senior React/TypeScript Developer at [Webscope](https://webscope.io)
   `);
 
   return (
