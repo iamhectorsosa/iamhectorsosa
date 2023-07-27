@@ -1,5 +1,6 @@
 import { BlogItem } from "@components/BlogItem";
 import { NavigationLink } from "@components/NavigationLink";
+import { TechStack } from "@components/TechStack";
 import { baseMetadata } from "@config/meta";
 import { compileMarkdown, getPosts } from "@lib/mdx";
 import { Metadata } from "next";
@@ -14,7 +15,18 @@ export default async function Home() {
 
   return (
     <div className="space-y-12">
-      <section className="space-y-3">{bio}</section>
+      <section className="space-y-3">
+        <h3 className="text-2xl font-semibold tracking-tight">About</h3>
+        {bio}
+      </section>
+      <section className="space-y-6">
+        <h3 className="text-2xl font-semibold tracking-tight">
+          Technology Stack
+        </h3>
+        <div className="space-y-6">
+          <TechStack />
+        </div>
+      </section>
       <section className="space-y-6">
         <h3 className="text-2xl font-semibold tracking-tight">
           Latest blog posts
