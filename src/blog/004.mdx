@@ -1,0 +1,107 @@
+---
+title: Understanding Suspense with Next 13
+description: How Suspense made "UI Loading state" a first class declarative concept in the React programming model.
+date: "2023-01-06T00:00:00Z"
+github: iamhectorsosa
+---
+
+## On this page
+
+## Introduction
+
+Before even talking about Suspense we need to know that the most important addition in React 18 is concurrency. In computer science, **Concurrency** is the ability to deal with lots of things at once, which is not the same as doing lots of things at once (as parallelism is).
+
+> _How_ React has achieved concurrency has been completely abstracted from us, as React wants us to focus on _what_ we want the user experience to look like, whereas they'll handle _how_ to deliver that experience.
+
+When it comes to UX, Concurrency is such a big deal because it's the driving mechanism that enables our applications to have multiple versions of its UI at any time without blocking the _main thread_, all whilst enabling fast, consistent and reliable experiences for our users.
+
+## Where does Suspense fit in all this?
+
+If you're new to the React ecosystem, you might be asking yourself: **What's Suspense?** Suspense lets you declaratively specify the loading state for a part of the component tree if it's not yet ready to be displayed.
+
+Suspense isn't new in the React ecosystem. However, now in React 18, Suspense has support for server-rendering and brings all of React's new concurrent features. This also is a huge win for DX, because as developers, we are no longer forced between doing something early, or doing something late, we just literally need to start using Suspense.
+
+> Concurrency in React 18 is unlocked by Suspense, making "UI Loading state" a first-class declarative concept in the React programming model.
+
+### How does it work?
+
+Conceptually, you can think of Suspense as being similar to a `catch` block. However, instead of catching errors, it catches components "suspending". Any component in the tree can "suspend", which means that it's not ready to render.
+
+**Only Suspense-enabled data sources will activate Suspense**, such as:
+
+- Lazy-loading component code using `lazy()` (_pre-React 18_)
+- Data fetching with Suspense-enabled frameworks like Relay, Next.js, Remix
+
+Luckily for us, the code looks exactly the same:
+
+```typescript
+<div>
+    <Card />
+    <Suspense fallback={<PhotoSkeleton />}>
+        // The Photo component will suspend
+        // and React will show PhotoSkeleton until ready
+        <Photo />
+    </Suspense>
+</div>
+<div>
+    <Suspense fallback={<ContentSkeleton />}>
+        <Content />
+    </Suspense>
+</div>
+```
+
+## What are the biggest perks of using Suspense in React 18?
+
+- **Streaming HTML** lets you start emitting HTML as early as you’d like, streaming HTML for additional content together with the `<script>` tags that put them in the right places.
+- **Selective Hydration** lets you start hydrating your app as early as possible before the rest of the HTML and the JavaScript code are fully downloaded. It also prioritizes hydrating the parts the user is interacting with, creating an illusion of instant hydration.
+
+## How to use Suspense in Next 13?
+
+Thanks to Next 13 [new file-system based router](https://beta.nextjs.org/docs/routing/fundamentals) and [special file conventions](https://beta.nextjs.org/docs/routing/fundamentals#special-files) using Suspense becomes a breeze. Their framework abstracts boundaries altogether (this also includes Error boundaries) by letting us focus even more on what we want the user experience to look like, while they handle the rest.
+
+Next 13 achieves this abstraction using their file-based router. Let's imagine a directory structure where we are building a route called `/loading` (we probably should've used a better name but as you all know, naming is hard):
+
+```graphql
+# @path: ./app/examples
+├── loading            # <-- Route segment
+│   └──loading.tsx    # <-- Loading UI
+│   └──page.tsx       # <-- Page content for `/examples/loading` route
+```
+
+As you can already tell, each folder in a route represents a route segment as long as it has a `page.tsx` file (so `./app/examples/loading` directory structure would translate to the path `/examples/loading`).
+
+In Next 13, `loading.tsx` files _automatically wrap_ a page or child layout in a React Suspense boundary without having to declare it manually, providing an instant loading state on the first load and when navigating between sibling routes.
+
+The directory structure above would translate into the following component hierarchy:
+
+```typescript
+// @path: ./app/examples/loading
+<Layout>
+  <Suspense fallback={<LoadingSkeleton />}>
+    <Page />
+  </Suspense>
+</Layout>
+```
+
+By using these special file conventions, you can structure your Suspense boundaries with ease:
+
+```typescript
+// @path: ./loading/loading.tsx
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <LoadingSkeleton />;
+}
+
+// @path: ./loading/Page.tsx
+export default function Page() {
+  return <PageContent />;
+}
+```
+
+## Main takeaways
+
+Next 13 help us create meaningful Loading UI with **React Suspense**. Here is what you need to know:
+
+- The special file `loading.tsx` (by default server components) enables us to show instant loading states from the server for an entire route segment while its content loads.
+- You can mix and match your app's architecture using manually-defined `<Suspense />` boundaries for more granular loading UI.
+- Navigation is interruptible, shared layouts remain interactive while nested layouts or pages load.

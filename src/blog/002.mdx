@@ -1,58 +1,74 @@
 ---
-title: Mapping Request Paths using Next
-description: What's the difference between rewrites and redirects, and how to use them?
-date: "2022-09-30T00:00:00Z"
+title: Learn the Basics of GitHub's CLI
+description: GitHub CLI is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line.
+date: "2022-09-22T00:00:00Z"
 github: iamhectorsosa
 ---
 
-Inside your Next application, your `next.config.js` file is a regular Node module used by the server and build phases where you can configure rewrites and redirects for your application. What's the difference between them?
+## On this page
 
-- [Rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) allow you to map a request path to a different destination as a URL proxy (masking the destination path, without changing the User's location at all).
-- In contrast, [redirects](https://nextjs.org/docs/api-reference/next.config.js/redirects) will reroute you to a new page fully disclosing the destination URL.
+## Introduction
 
-Both of them are _async_ functions that return at least an array of objects that require the following key-value pairs: `source`, `destination`, `permanent` (only for _redirects_). Rewrites can be incredibly useful to temporarily map old paths: `/old-blog/:slug` to `/new-blog/:slug` ensuring there are no broken links in your application. However, let's say if you'd want to map `/github` to your GH profile. Here, you'd use a _redirect_ instead.
+GitHub CLI, or `gh`, is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line. `gh` is available via [Homebrew](https://brew.sh/) by running the command `brew install gh`.
 
-```js
-/*** `next.config.js` ***/
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: "/github",
-        // `source` type `String` - is the incoming request path pattern
-        destination: "https://github.com/iamhectorsosa",
-        // `destination` type `String` - is the path you want to route to
-        permanent: true,
-        // `permanent` type `Boolean` Only for Redirects
-        // `true` will use 308 to cache the redirect
-        // `false` will use 307 as temporary
-      },
-    ];
-  },
-};
+You are working in one of your projects, where you will create (a) an _issue_, (b) a _branch_ and (c) a _pull request_ to (d) _merge_ changes into your main production branch. We will explore these `gh` commands straight from its [Manual](https://cli.github.com/manual/gh).
+
+## Creating an issue
+
+[GitHub Issues](https://docs.github.com/en/issues) helps you to track ideas, feedback, tasks, bugs and plan for your work right where development takes place.
+
+```bash
+## Other available flags
+## -a --assignee <login> // Use "@me" to self-assign
+## -l --label <name> // Check your pre-defined labels
+
+$ gh issue create --t "My new issue"  --b "Here are more details."
+
+## Add the web flag at the end to open the draft before submitting
+## -w --web
 ```
 
-Vercel also offers a solution for _redirects_ and _rewrites_ within their `vercel.json` [Project config](https://vercel.com/docs/project-configuration) file. Here, [redirects](https://vercel.com/docs/project-configuration#project-configuration/redirects) and [rewrites](https://vercel.com/docs/project-configuration#project-configuration/rewrites) are **framework agnostic**. You can use them with any framework supported on their platform. However, in case of a Next.js application, Vercel recommends **framework level redirects** as they do have precedence over platform level redirects. Here's [Lee Rob](https://twitter.com/leeerob)'s [project config file](https://github.com/leerob/leerob.io/blob/main/vercel.json).
+## Creating a branch to work on an issue
 
-## What about subdomains?
+If you used the `--web` flag, you can create a branch to work on an issue directly from the issue page by clicking under **Development > Create a branch**. Once the branch is created, to start working, you can checkout the branch in your local repository:
 
-With subdomains such as `subdomain.domain.com`, Vercel explains this incredibly easy (here's their [redirecting subdomain guide](https://vercel.com/guides/can-i-redirect-from-a-subdomain-to-a-subpath)). In short, let's say you want to rewrite `app.acme.com` to `acme.com/app`, you'll need to configure a rewrite making use of the `has` field.
+```bash
+$ git fetch origin
+$ git checkout <branch_name>
 
-```js
-/*** `vercel.json` ***/
-{
-  "rewrites": [
-    // Requests to app.acme.com, will be rewritten to acme.com/app.
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "app.acme.com"
-        }
-      ],
-      "destination": "/app/:path*"
-    }
-  ]
-}
+## Can verify by running
+$ git branch
 ```
+
+This is incredibly useful and convenient because this links any pull request created for that branch, where successfully merging that PR will replace the relationship (from branch to PR) and automatically close the issue.
+
+## Creating a pull request to review your work
+
+You finished and committed your work. now you're ready to create a PR. Pull requests (PR) lets you discuss and review potential changes before (if _'LGTM'_) merging them into production. I would recommend creating your PR _interactively_. For more information on the available flags, visit [CLI Manual: PR Create](https://cli.github.com/manual/gh_pr_create)
+
+```bash
+## I would recommend creating your PR Interactively
+## This will give you access to nano to write better notes
+$ gh pr create
+? Title <title>
+? Body [(e) to launch nano, enter to skip]
+## After editing the body it will display as <Received>
+
+## Once created, you can view and access the PR by running:
+$ gh pr list
+$ gh pr <number> --web
+```
+
+## Merging your changes to production
+
+Once the changes you've made on your head branch are ready to be merged into the main (base) branch, you are ready to push your code to production.
+
+```bash
+## --delete-branch: will delete the local and remote branch after merge
+## --merge: will merge the commits with the base branch
+$ gh pr merge <number> --body <text> --delete-branch --merge
+
+# If no argument, the PR that belongs to the current branch is selected.
+```
+
+Immediately after this, (a) your _issue_ will be marked as closed, (b) the local and remote _development branch_ will be deleted and your (c) commit change _merged_ into the main branch. For more information on visit GitHub's documentation: [Collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).

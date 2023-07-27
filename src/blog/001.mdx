@@ -1,72 +1,164 @@
 ---
-title: Learn the Basics of GitHub's CLI
-description: GitHub CLI is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line.
-date: "2022-09-22T00:00:00Z"
+title: Introduction to APIs
+description: Application Programming Interfaces (APIs) are constructs made available in programming languages to allow developers to create complex functionality with ease.
+date: "2022-06-03T00:00:00Z"
 github: iamhectorsosa
 ---
 
 ## On this page
 
-GitHub CLI, or `gh`, is a free and open source tool that enables you to use GitHub's pull requests, issues, repositories and more directly from your command line. `gh` is available via [Homebrew](https://brew.sh/) by running the command `brew install gh`.
+## Introduction
 
-You are working in one of your projects, where you will create (a) an _issue_, (b) a _branch_ and (c) a _pull request_ to (d) _merge_ changes into your main production branch. We will explore these `gh` commands straight from its [Manual](https://cli.github.com/manual/gh).
+Application Programming Interfaces (APIs) are constructs made available in programming languages to allow developers to create complex functionality with ease. They abstract more complex code away from you, providing some easier syntax to use in its place.
 
-## Creating an issue
+> "It will always be easier to use APIs and write higher-level code (such as JavaScript or Python), rather than trying to directly write low level code (as C or C++) to directly achieve your intended functionality."
 
-[GitHub Issues](https://docs.github.com/en/issues) helps you to track ideas, feedback, tasks, bugs and plan for your work right where development takes place.
+## Web-based APIs
 
-```bash
-## Other available flags
-## -a --assignee <login> // Use "@me" to self-assign
-## -l --label <name> // Check your pre-defined labels
+Client-side JavaScript, in particular, has many APIs available, providing you with enhanced functionality to use in your JavaScript code. They can be categorized as:
 
-$ gh issue create --t "My new issue"  --b "Here are more details."
+- **Browser APIs**: Built into web browsers and able to expose data from the browser and surrounding computer environments.
+- **Third-party APIs**: Retrieve data from somewhere else on the web.
 
-## Add the web flag at the end to open the draft before submitting
-## -w --web
+### Browser APIs
+
+When writing code for the web, there are numerous [Browser APIs available](https://developer.mozilla.org/en-US/docs/Web/API), which are typically used with JavaScript. The Browser has APIs available such as [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) or, in my opinion, one of the most commonly used ones, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+They both provide interfaces. For instance, the _Geolocation API_ allows users to provide their location to web applications and the _Fetch API_ provides an interface for fetching resources across the network with a more powerful and flexible subset of features than its predecessors ([XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)).
+
+### Third-party APIs
+
+Nowadays, very few applications (if any) stand alone. You will most likely need to build internal APIs or consume third party APIs to avoid reinventing the wheel. As applications grow bigger and gain popularity, others will be interested in leveraging your technology or data, which will create an opportunity for you to expand the influence of your application.
+
+> "APIs are no longer just tools to power your applications, but products or platforms of their own right."
+
+With APIs quickly gaining popularity in the world of technology, we've seen a huge growth in its availability over the past twenty years (see [Malamud's Analyzing Novell Networks from 1959](https://babel.hathitrust.org/cgi/pt?id=mdp.39015018454903&view=1up&seq=314&skin=2021)). Let's quickly highlight two examples of Third-party APIs:
+
+- [NASA APIs](https://api.nasa.gov/): Making NASA data, including imagery, eminently accessible to application developers.
+- [Public APIs](https://github.com/public-apis/public-apis): A collective list of free APIs for use in software and web development.
+
+Let's take a quick look at the NASA APIs. One of the most popular websites at NASA is the [Astronomy Picture of the Day](http://apod.nasa.gov/apod/astropix.html) (in fact, across all federal agencies). NASA claims it's as popular as a Justin Bieber video. The APOD (Astronomy Picture of the Day) API endpoint (will come back to this term later) structures imagery and associated metadata to be repurposed for other applications. Try it [here](https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY) with NASA's demo key (will come back to this term later too). Just make sure to install a JSON formatter for your browser in order to make an easier sense of the data, I'd recommend [JSONView](https://jsonview.com/).
+
+```json
+{
+  "date": "2022-04-12",
+  "explanation": "{...}",
+  "hdurl": "https://apod.nasa.gov/apod/image/2204/N11_HubbleLake_1600.jpg",
+  "media_type": "image",
+  "service_version": "v1",
+  "title": "N11: Star Clouds of the LMC",
+  "url": "https://apod.nasa.gov/apod/image/2204/N11_HubbleLake_960.jpg"
+}
 ```
 
-## Creating a branch to work on an issue
+#### Can we use Browser and Third-party APIs together?
 
-If you used the `--web` flag, you can create a branch to work on an issue directly from the issue page by clicking under **Development > Create a branch**. Once the branch is created, to start working, you can checkout the branch in your local repository:
+Yes, we can! Let's take the aforementioned Browser's Fetch API and create a request to get the NASA's Astronomy Picture of the Day. Here's a quick [Codepen](https://codepen.io/ekqt/pen/yLpqqjP?editors=1011) recreating their APOD website. What's happening behind the scenes? A basic fetch request is really simple to set up.
 
-```bash
-$ git fetch origin
-$ git checkout <branch_name>
-
-## Can verify by running
-$ git branch
+```javascript
+fetch(path)
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 ```
 
-This is incredibly useful and convenient because this links any pull request created for that branch, where successfully merging that PR will replace the relationship (from branch to PR) and automatically close the issue.
+In the example above, we're using the simplest form of `fetch()` which takes one argument — the resource you want — and does not directly return the JSON (more on this term later) response body but instead returns a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object representing the entire HTTP response. So to get the JSON response body content, you need to use the `json()` method, which returns the result of parsing the response body text as JSON. You can read more information, [here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), on Using the Fetch API.
 
-## Creating a pull request to review your work
+## How the Web Works
 
-You finished and committed your work. now you're ready to create a PR. Pull requests (PR) lets you discuss and review potential changes before (if _'LGTM'_) merging them into production. I would recommend creating your PR _interactively_. For more information on the available flags, visit [CLI Manual: PR Create](https://cli.github.com/manual/gh_pr_create)
+Before we move any forward, let's explore some basic concepts on how the web works. What happens when you view a website from a web browser on your computer or phone.
 
-```bash
-## I would recommend creating your PR Interactively
-## This will give you access to nano to write better notes
-$ gh pr create
-? Title <title>
-? Body [(e) to launch nano, enter to skip]
-## After editing the body it will display as <Received>
+### What exactly happens? (An oversimplified story)
 
-## Once created, you can view and access the PR by running:
-$ gh pr list
-$ gh pr <number> --web
+When you type a web address into your browser:
+
+1. The browser goes to the [DNS](https://developer.mozilla.org/en-US/docs/Glossary/DNS) (Domain Name System) server, and finds the real address of the server (website's IP address) where the website lives on, then
+2. The browser sends an [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) (Hypertext Transfer Protocol) request to the server, asking it to send the website back to the client(browser), then
+3. If the server successfully accepts the request, it will respond with a "[200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses)" message and send back the website to the client, and finally
+4. The browser displays the website for you.
+
+#### A small note on DNS
+
+Real web addresses aren't the nice, memorable strings you type into your address bar to find your favorite websites. They are special numbers that look like this: `63.245.215.20`. These are called [IP addresses](https://developer.mozilla.org/en-US/docs/Glossary/IP_Address), and they represent a unique location on the web. DNS servers translates human-friendly domains (such as mozilla.org) to numeric IP addresses (such as 151.106.5.172).
+
+Technically speaking, websites could be reached directly via their IP addresses. You can try this by replicating a DNS request using a tool like [IP Checker](https://ipinfo.info/html/ip_checker.php).
+
+### What is Hypertext Transfer Protocol (HTTP)?
+
+HTTP is a protocol for fetching resources, such as HTML. It was designed for communication between web browsers and web servers following a [stateless](https://en.wikipedia.org/wiki/Stateless_protocol) and simple [client-server model](https://en.wikipedia.org/wiki/Client%E2%80%93server_model).
+
+#### Let's make a simple HTTP Request
+
+Send an HTTP message: let's try inspecting what's happening behind the scenes with NASA's [APOD API](https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY). To make this request on the Browser: 1) Open a new Tab, 2) Open the DevTools from your Browser and then view the Network requests, and 3) visit the URL.
+
+```yaml
+/** Request Headers*/
+GET /planetary/apod?api_key=DEMO_KEY HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Host: api.nasa.gov
 ```
 
-## Merging your changes to production
+View the response sent by the server
 
-Once the changes you've made on your head branch are ready to be merged into the main (base) branch, you are ready to push your code to production.
+```yaml
+/** Response Headers*/
+HTTP/1.1 200 OK
+Date: <date>
+Content-Type: application/json
 
-```bash
-## --delete-branch: will delete the local and remote branch after merge
-## --merge: will merge the commits with the base branch
-$ gh pr merge <number> --body <text> --delete-branch --merge
-
-# If no argument, the PR that belongs to the current branch is selected.
+/** Response Body*/
+{...}
 ```
 
-Immediately after this, (a) your _issue_ will be marked as closed, (b) the local and remote _development branch_ will be deleted and your (c) commit change _merged_ into the main branch. For more information on visit GitHub's documentation: [Collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
+We can replicate the request above using an API platform tool like [Postman](https://www.postman.com/product/what-is-postman/): 1) Go to [Postman's web application](https://web.postman.co/), 2) use your credentials to create an account or log in and create a Basic HTTP Request and 3) Send a `GET` request with the APOD API's URL [https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY](https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY).
+
+### Identifying Resources on the Web
+
+The target of an HTTP request is called a "resource" (a document, a photo, anything else). Each resource is identified by a [Uniform Resource Identifier (URI)](https://developer.mozilla.org/en-US/docs/Glossary/URI) (URLs are the most common form of URIs known as web addresses) used throughout HTTP for identifying resources. Let's take a look at some examples of URLs.
+
+```yaml
+https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
+https://apod.nasa.gov/apod/image/2204/DevilsWay_Kiczenski_960.jpg
+```
+
+[Here](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL#basics_anatomy_of_a_url) you can find more information on the anatomy of a URL.
+
+## REST — The Good and the Bad
+
+Representational State Transfer (REST) is an architectural style that guides the design and development of processes to interact with resources on the web. An API that complies with most or all of its [guiding constraints](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) is considered to be a _RESTful API_ for a more comprehensive guideline refer [here](https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md).
+
+REST uses all the advantages of the HTTP like [request verbs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods), [URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/Resources_and_URIs), [media-types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types), [caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching) etc. Since REST services work like normal websites, they are easy to create and consume compared to other styles of web services.
+
+Every RESTful API starts with what [Fielding](https://en.wikipedia.org/wiki/Roy_Fielding) calls the \*Null Style\*\*. It all starts with the system needs as a whole, _without constraints_, and then incrementally identifying and applying constraints to elements of the system in order to allow forces that influence system behavior to flow naturally, in harmony with the system. This style emphasizes restraint and understanding of the system context. So let's quickly catch up on what should we know from its guiding constraints.
+
+### Client-Server
+
+- **What is it?** — [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is the driving principle behind this constraint, separating the user _interface_ (client) from the _data storage_ (server).
+- **The Good** — By doing so, we improve _portability_ across multiple platforms and improve _scalability_ by simplifying the server components. This separation allows each component to evolve independently.
+
+### Stateless
+
+- **What is it?** — Client-server communication must be kept _stateless_ in nature, such that each request must contain all the information necessary to understand the request (and cannot rely on any stored context on the server).
+- **The Good** — _Visibility_ is improved because the system doesn't have to look further than the request itself to determine its nature. _Reliability_ is improved because it eases the task of recovering from partial failures. Finally, _scalability_ is improved because it allows the server to quickly free resources for additional requests and simplifies implementation because it doesn't have to manage resource usage across requests.
+- **The Bad** — The disadvantage is that it may decrease _network performance_ by increasing the repetitive data (per-interaction overhead) sent in a series of requests, since that data cannot be left on the server in a shared context. In addition, placing the application state on the client-side _reduces the server's control_ over consistent application behavior, since the application becomes dependent on the correct implementation of semantics across multiple client versions.
+
+### Cache
+
+- **What is it?** — The addition of cache components to form a _client-cache-stateless-server_ architectural style in REST. A cache acts as a mediator between client and server in which the responses to prior requests can, if they are considered cacheable, be reused in response to later requests that are equivalent and likely to result in a response identical to that in the cache if the request were to be forwarded to the server.
+- **The Good** — Potential to partially or completely _eliminate interactions_, improving _efficiency_ and user-perceived _performance_.
+- **The Bad** — Cache can decrease _reliability_ if stale data within the cache differs significantly from the data that would have been obtained had the request been sent directly to the server.
+
+### Uniform Interface
+
+- **What is it?** — The application of generality or uniformity between component interfaces.
+- **The Good** — The overall system architecture is simplified and the visibility of interactions is improved. Implementations are decoupled from the services they provide, which encourage independent evolvability.
+- **The Bad** — It degrades efficiency, since information is transferred in a standardized form rather than one which is specific to an application's needs.
+
+### Layered System
+
+- **What is it?** — Architecture composed of hierarchical layers containing component behavior such that each component cannot _see_ beyond the immediate layer with which they are interacting.
+- **The Good** — Layers can be used to _encapsulate_ legacy services and to _protect_ new services from legacy clients. Intermediaries can also be used to improve system _scalability_ by enabling load balancing of services across multiple networks and processors.
+- **The Bad** — They add overhead and latency to the processing of data, reducing user-perceived _performance_. For a network-based system that supports cache constraints, this can be offset by the benefits of shared caching at intermediaries. Placing shared caches at the boundaries of an organizational domain can result in significant performance benefits.
+
+## Conclusion
+
+For a more detailed explanation on design, structuring and maintaining RESTful APIs see [here](https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md).
