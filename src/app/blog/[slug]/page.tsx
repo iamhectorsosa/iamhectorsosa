@@ -47,7 +47,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
         <h1 className="text-5xl font-semibold tracking-tight">
           {frontmatter.title}
         </h1>
-        <p className="leading-7 line-clamp-2 text-muted-foreground pt-2">
+        <p className="leading-7 text-muted-foreground pt-2">
           {frontmatter.description}
         </p>
       </header>
