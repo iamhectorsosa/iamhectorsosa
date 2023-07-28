@@ -198,6 +198,23 @@ const ProseBlockquote = forwardRef<
 
 ProseBlockquote.displayName = "ProseBlockquote";
 
+const ProseOL = forwardRef<HTMLUListElement, ComponentPropsWithoutRef<"ul">>(
+  (props, ref) => {
+    const { children, ...otherProps } = props;
+    return (
+      <ul
+        className="list-inside list-decimal font-light leading-loose marker:text-muted-foreground [&>li>p]:inline"
+        ref={ref}
+        {...otherProps}
+      >
+        {children}
+      </ul>
+    );
+  }
+);
+
+ProseOL.displayName = "ProseOL";
+
 const ProseUL = forwardRef<HTMLUListElement, ComponentPropsWithoutRef<"ul">>(
   (props, ref) => {
     const { children, ...otherProps } = props;
@@ -266,6 +283,7 @@ export {
   ProseStrong,
   ProseAnchor,
   ProseBlockquote,
+  ProseOL,
   ProseUL,
   ProseInlineCode,
   ProsePre,
