@@ -126,7 +126,7 @@ export const Contributions = async () => {
 
   return (
     <TooltipProvider>
-      <div className="space-y-2">
+      <div className="space-y-3">
         <p className="leading-7 line-clamp-2">
           {
             data.user.contributionsCollection.contributionCalendar
@@ -134,38 +134,34 @@ export const Contributions = async () => {
           }{" "}
           contributions in the last year
         </p>
-        <div className="space-y-1">
-          {firstDate && (
-            <p className="text-muted-foreground text-sm">
-              {dayjs(firstDate).format("MMMM YY")}
-            </p>
+        {firstDate && (
+          <p className="text-muted-foreground text-sm">
+            {dayjs(firstDate).format("MMMM YY")}
+          </p>
+        )}
+        <div className="grid grid-cols-[repeat(53,minmax(0,1fr))] w-full">
+          {data.user.contributionsCollection.contributionCalendar.weeks.map(
+            (week, i) => (
+              <div key={i}>
+                {week.contributionDays.map((days, i) => (
+                  <Tooltip
+                    key={i}
+                    content={`${
+                      days.contributionCount
+                    } contributions on ${dayjs(days.date).format("ddd D MMM")}`}
+                    side="top"
+                  >
+                    <div
+                      className="aspect-square dark:invert border border-transparent hover:border-background"
+                      style={{
+                        backgroundColor: days.color,
+                      }}
+                    />
+                  </Tooltip>
+                ))}
+              </div>
+            )
           )}
-          <div className="grid grid-cols-[repeat(53,minmax(0,1fr))] w-full">
-            {data.user.contributionsCollection.contributionCalendar.weeks.map(
-              (week, i) => (
-                <div key={i}>
-                  {week.contributionDays.map((days, i) => (
-                    <Tooltip
-                      key={i}
-                      content={`${
-                        days.contributionCount
-                      } contributions on ${dayjs(days.date).format(
-                        "ddd D MMM"
-                      )}`}
-                      side="top"
-                    >
-                      <div
-                        className="aspect-square dark:invert border border-transparent hover:border-background"
-                        style={{
-                          backgroundColor: days.color,
-                        }}
-                      />
-                    </Tooltip>
-                  ))}
-                </div>
-              )
-            )}
-          </div>
         </div>
         <a
           className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground text-sm"

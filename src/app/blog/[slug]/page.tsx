@@ -51,7 +51,7 @@ export default async function BlogPost({ params: { slug } }: BlogPostProps) {
           {frontmatter.description}
         </p>
       </header>
-      <article className="space-y-6 my-9 [&>h2]:!mt-12 [&>h2]:max-w-xl">
+      <article className="space-y-6 my-12 [&>h2]:!mt-12 [&>h3]:!mt-12 [&>h4]:!mt-12 [&>h2]:max-w-x">
         {content}
       </article>
       <footer className="flex items-center gap-x-3">

@@ -12,54 +12,50 @@ export const metadata: Metadata = baseMetadata;
 export default async function Home() {
   const posts = await getPosts();
   const { content: bio } = await compileMarkdown(`
-  Msc. Project Management and UI Engineer based in Prague Czech Republic but made in [Honduras](https://youtu.be/UbGs5shZyxc). Currently working as a Senior React/TypeScript Developer at [Webscope](https://webscope.io)
+  Msc. Project Management and UI Engineer based in Prague Czech Republic but made in [Honduras](https://youtu.be/UbGs5shZyxc). Currently working as a Senior React/TypeScript Developer at [Webscope](https://webscope.io).
   `);
 
   return (
     <div className="space-y-12">
       <section className="space-y-6">
-        <ProseH2>About</ProseH2>
+        <ProseH2 id="about">About</ProseH2>
         {bio}
       </section>
       <section className="space-y-6">
-        <ProseH2>Contributions</ProseH2>
+        <ProseH2 id="contributions">Contributions</ProseH2>
         <Contributions />
       </section>
       <section className="space-y-6">
-        <ProseH2>Technology Stack</ProseH2>
+        <ProseH2 id="tech-stack">Technology Stack</ProseH2>
         <TechStack />
       </section>
       <section className="space-y-6">
-        <ProseH2>Talks</ProseH2>
-        <div className="space-y-6">
-          {talks
-            .slice(0, 3)
-            .map(({ date, title, description, href, location }, id) => (
-              <Item
-                key={id}
-                href={href}
-                date={date}
-                title={title}
-                description={description}
-                location={location}
-                prefetch={false}
-              />
-            ))}
-        </div>
-      </section>
-      <section className="space-y-6">
-        <ProseH2>Latest blog posts</ProseH2>
-        <div className="space-y-6">
-          {posts.slice(0, 3).map(({ id, date, title, description, slug }) => (
+        <ProseH2 id="talks">Talks</ProseH2>
+        {talks
+          .slice(0, 3)
+          .map(({ date, title, description, href, location }, id) => (
             <Item
               key={id}
-              href={`blog/${slug}`}
+              href={href}
               date={date}
               title={title}
               description={description}
+              location={location}
+              prefetch={false}
             />
           ))}
-        </div>
+      </section>
+      <section className="space-y-6">
+        <ProseH2 id="latest-blog-posts">Latest blog posts</ProseH2>
+        {posts.slice(0, 3).map(({ id, date, title, description, slug }) => (
+          <Item
+            key={id}
+            href={`blog/${slug}`}
+            date={date}
+            title={title}
+            description={description}
+          />
+        ))}
         <NavigationLink label="Go to all blog posts" href="/blog" />
       </section>
     </div>

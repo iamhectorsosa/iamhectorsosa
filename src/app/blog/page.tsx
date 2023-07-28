@@ -1,5 +1,6 @@
 import { Item } from "@components/Item";
 import { NavigationLink } from "@components/NavigationLink";
+import { ProseH2 } from "@components/ui/Typography";
 import { baseMetadata } from "@config/meta";
 import { getPosts } from "@lib/mdx";
 import { Metadata } from "next";
@@ -16,18 +17,16 @@ export default async function Home() {
   return (
     <>
       <section className="space-y-6">
-        <h3 className="text-2xl font-semibold tracking-tight">Blog posts</h3>
-        <div className="space-y-6">
-          {posts.map(({ id, date, title, description, slug }) => (
-            <Item
-              key={id}
-              href={`blog/${slug}`}
-              date={date}
-              title={title}
-              description={description}
-            />
-          ))}
-        </div>
+        <ProseH2>Blog posts</ProseH2>
+        {posts.map(({ id, date, title, description, slug }) => (
+          <Item
+            key={id}
+            href={`blog/${slug}`}
+            date={date}
+            title={title}
+            description={description}
+          />
+        ))}
         <NavigationLink label="Go back home" href="/" backNavigation />
       </section>
     </>
