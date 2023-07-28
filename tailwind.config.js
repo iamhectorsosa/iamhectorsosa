@@ -16,6 +16,8 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground) / <alpha-value>)",
         },
         border: "hsl(var(--border) / <alpha-value>)",
+        ring: "hsl(var(--ring) / <alpha-value>)",
+        focus: "hsl(var(--focus) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-grotesk)"],
