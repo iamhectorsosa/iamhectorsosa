@@ -126,7 +126,6 @@ export const Contributions = async () => {
 
   return (
     <TooltipProvider>
-      <h3 className="text-2xl font-semibold tracking-tight">Contributions</h3>
       <div className="space-y-2">
         <p className="leading-7 line-clamp-2">
           {

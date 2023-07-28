@@ -2,6 +2,7 @@ import { Contributions } from "@components/Contributions";
 import { Item } from "@components/Item";
 import { NavigationLink } from "@components/NavigationLink";
 import { TechStack } from "@components/TechStack";
+import { ProseH2 } from "@components/ui/Typography";
 import { baseMetadata } from "@config/meta";
 import { compileMarkdown, getPosts } from "@lib/mdx";
 import { Metadata } from "next";
@@ -16,23 +17,20 @@ export default async function Home() {
 
   return (
     <div className="space-y-12">
-      <section className="space-y-3">
-        <h3 className="text-2xl font-semibold tracking-tight">About</h3>
+      <section className="space-y-6">
+        <ProseH2>About</ProseH2>
         {bio}
       </section>
       <section className="space-y-6">
+        <ProseH2>Contributions</ProseH2>
         <Contributions />
       </section>
       <section className="space-y-6">
-        <h3 className="text-2xl font-semibold tracking-tight">
-          Technology Stack
-        </h3>
-        <div className="space-y-6">
-          <TechStack />
-        </div>
+        <ProseH2>Technology Stack</ProseH2>
+        <TechStack />
       </section>
       <section className="space-y-6">
-        <h3 className="text-2xl font-semibold tracking-tight">Talks</h3>
+        <ProseH2>Talks</ProseH2>
         <div className="space-y-6">
           {talks
             .slice(0, 3)
@@ -50,9 +48,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="space-y-6">
-        <h3 className="text-2xl font-semibold tracking-tight">
-          Latest blog posts
-        </h3>
+        <ProseH2>Latest blog posts</ProseH2>
         <div className="space-y-6">
           {posts.slice(0, 3).map(({ id, date, title, description, slug }) => (
             <Item

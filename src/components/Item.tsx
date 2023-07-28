@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import Link from "next/link";
+import { ProseH4, ProseP } from "./ui/Typography";
 
 export const Item = ({
   date,
@@ -17,22 +18,18 @@ export const Item = ({
   prefetch?: boolean;
 }) => {
   return (
-    <Link className="block group" href={href} prefetch={prefetch}>
-      <header className="space-y-2">
-        <div className="flex gap-1 text-sm text-muted-foreground">
-          <time dateTime={date}>{dayjs(date).format("ddd D MMMM YY")}</time>
-          {location && (
-            <>
-              <span>@</span>
-              {location}
-            </>
-          )}
-        </div>
-        <h1 className="text-xl font-semibold tracking-tight group-hover:text-foreground/60">
-          {title}
-        </h1>
-        <p className="leading-7 line-clamp-2">{description}</p>
-      </header>
+    <Link className="block group space-y-2" href={href} prefetch={prefetch}>
+      <div className="flex gap-1 text-sm text-muted-foreground">
+        <time dateTime={date}>{dayjs(date).format("ddd D MMMM YY")}</time>
+        {location && (
+          <>
+            <span>@</span>
+            {location}
+          </>
+        )}
+      </div>
+      <ProseH4 className="group-hover:text-foreground/60">{title}</ProseH4>
+      <ProseP className="line-clamp-2">{description}</ProseP>
     </Link>
   );
 };

@@ -30,13 +30,14 @@ import {
   SiTypescript,
   SiVercel,
 } from "react-icons/si";
+import { ProseH4 } from "./ui/Typography";
 
 export const TechStack = () => {
   return (
-    <>
+    <div className="space-y-6">
       <div className="space-y-4">
-        <h4 className="text-xl font-semibold tracking-tight">Languages</h4>
-        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-6 flex-wrap text-muted-foreground">
+        <ProseH4>Languages</ProseH4>
+        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-y-4 gap-x-6 flex-wrap text-muted-foreground">
           <SiCss3 />
           <SiSass />
           <SiMdx />
@@ -46,10 +47,8 @@ export const TechStack = () => {
         </div>
       </div>
       <div className="space-y-4">
-        <h4 className="text-xl font-semibold tracking-tight">
-          Frameworks, Platforms and Libraries
-        </h4>
-        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-6 flex-wrap text-muted-foreground">
+        <ProseH4>Frameworks, Platforms and Libraries</ProseH4>
+        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-y-4 gap-x-6 flex-wrap text-muted-foreground">
           <SiApollographql />
           <SiBootstrap />
           <SiChakraui />
@@ -68,10 +67,9 @@ export const TechStack = () => {
         </div>
       </div>
       <div className="space-y-4">
-        <h4 className="text-xl font-semibold tracking-tight">
-          Hosting/PaaS/SaaS and Databases
-        </h4>
-        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-6 flex-wrap text-muted-foreground">
+        <ProseH4>Hosting/PaaS/SaaS and Databases</ProseH4>
+
+        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-y-4 gap-x-6 flex-wrap text-muted-foreground">
           <SiFirebase />
           <SiGithub />
           <SiMongodb />
@@ -80,14 +78,14 @@ export const TechStack = () => {
         </div>
       </div>
       <div className="space-y-4">
-        <h4 className="text-xl font-semibold tracking-tight">Design</h4>
-        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-6 flex-wrap text-muted-foreground">
+        <ProseH4> Design</ProseH4>
+        <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-y-4 gap-x-6 flex-wrap text-muted-foreground">
           <SiFigma />
           <SiAdobeillustrator />
           <SiAdobelightroom />
           <SiAdobephotoshop />
         </div>
       </div>
-    </>
+    </div>
   );
 };
