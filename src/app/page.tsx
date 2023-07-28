@@ -1,5 +1,5 @@
 import { Contributions } from "@components/Contributions";
-import { BlogItem } from "@components/BlogItem";
+import { Item } from "@components/Item";
 import { NavigationLink } from "@components/NavigationLink";
 import { TechStack } from "@components/TechStack";
 import { baseMetadata } from "@config/meta";
@@ -32,14 +32,32 @@ export default async function Home() {
         </div>
       </section>
       <section className="space-y-6">
+        <h3 className="text-2xl font-semibold tracking-tight">Talks</h3>
+        <div className="space-y-6">
+          {talks
+            .slice(0, 3)
+            .map(({ date, title, description, href, location }, id) => (
+              <Item
+                key={id}
+                href={href}
+                date={date}
+                title={title}
+                description={description}
+                location={location}
+                prefetch={false}
+              />
+            ))}
+        </div>
+      </section>
+      <section className="space-y-6">
         <h3 className="text-2xl font-semibold tracking-tight">
           Latest blog posts
         </h3>
         <div className="space-y-6">
           {posts.slice(0, 3).map(({ id, date, title, description, slug }) => (
-            <BlogItem
+            <Item
               key={id}
-              slug={slug}
+              href={`blog/${slug}`}
               date={date}
               title={title}
               description={description}
@@ -51,3 +69,22 @@ export default async function Home() {
     </div>
   );
 }
+
+const talks = [
+  {
+    href: "https://github.com/iamhectorsosa/suspense-demo",
+    date: "2023-12-14T00:00:00Z",
+    title: "Understanding Suspense with Next 13",
+    location: "Webscope Brno",
+    description:
+      'How Suspense made "UI Loading state" a first class declarative concept in the React programming model.',
+  },
+  {
+    href: "https://www.figma.com/file/4kk6YfgSq6ak691XSEhXe6/REST-API",
+    date: "2022-06-24T00:00:00Z",
+    title: "REST API Fundamentals Workshop",
+    location: "GuideVision Prague",
+    description:
+      "Introduction to APIs, designing API integrations and building a SN Slack Bot.",
+  },
+];

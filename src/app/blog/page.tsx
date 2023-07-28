@@ -1,4 +1,4 @@
-import { BlogItem } from "@components/BlogItem";
+import { Item } from "@components/Item";
 import { NavigationLink } from "@components/NavigationLink";
 import { baseMetadata } from "@config/meta";
 import { getPosts } from "@lib/mdx";
@@ -19,9 +19,9 @@ export default async function Home() {
         <h3 className="text-2xl font-semibold tracking-tight">Blog posts</h3>
         <div className="space-y-6">
           {posts.map(({ id, date, title, description, slug }) => (
-            <BlogItem
+            <Item
               key={id}
-              slug={slug}
+              href={`blog/${slug}`}
               date={date}
               title={title}
               description={description}
