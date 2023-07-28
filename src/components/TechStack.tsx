@@ -69,7 +69,7 @@ export const TechStack = () => {
       </div>
       <div className="space-y-4">
         <h4 className="text-xl font-semibold tracking-tight">
-          Hosting/Pass/Saas and Databases
+          Hosting/PaaS/SaaS and Databases
         </h4>
         <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-6 flex-wrap text-muted-foreground">
           <SiFirebase />
