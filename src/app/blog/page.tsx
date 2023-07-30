@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <>
       <section className="space-y-6">
-        <ProseH2>Blog posts</ProseH2>
+        <ProseH2 id="blog-posts">Blog posts</ProseH2>
         {posts.map(({ id, date, title, description, slug }) => (
           <Item
             key={id}
