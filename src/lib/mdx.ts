@@ -83,7 +83,7 @@ function getFilename(slug: string): string {
 // ⬇️ remark toc Options
 
 const remarkTocOptions: RemarkTocOptions = {
-  heading: "On this page",
+  heading: "In this article",
   maxDepth: 2,
 };
 

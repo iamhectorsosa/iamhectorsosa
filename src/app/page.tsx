@@ -26,7 +26,7 @@ export default async function Home() {
         <Contributions />
       </section>
       <section className="space-y-6">
-        <ProseH2 id="tech-stack">Technology Stack</ProseH2>
+        <ProseH2 id="tech-stack">Technology stack</ProseH2>
         <TechStack />
       </section>
       <section className="space-y-6">
