@@ -1,6 +1,6 @@
 "use client";
-import { MobileNavigationMenu } from "@components/MobileNavigationMenu";
 import { ThemeToggle } from "@components/ThemeToggle";
+import { ContextMenu } from "@components/ContextMenu";
 import { cn } from "@utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,7 +20,7 @@ export const Navbar = () => {
   const pathname = usePathname();
   const basePath = pathname.match(/^\/[^/]+/)?.at(0) ?? "/";
   return (
-    <div className="border-b border-border flex items-center justify-center relative">
+    <div className="border-b border-border  flex items-center justify-center relative">
       <div
         style={{
           position: "absolute",
@@ -36,7 +36,7 @@ export const Navbar = () => {
         <Link href="/">
           <h1 className="font-semibold text-2xl tracking-tight">Hector Sosa</h1>
         </Link>
-        <div className="flex justify-between items-end relative">
+        <div className="flex justify-between items-end">
           <ul className="flex items-center gap-x-4 mt-1">
             {navItems.map(({ href, label }) => (
               <Link
@@ -53,7 +53,7 @@ export const Navbar = () => {
           </ul>
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <MobileNavigationMenu />
+            <ContextMenu />
           </div>
         </div>
       </nav>
