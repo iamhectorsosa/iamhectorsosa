@@ -1,4 +1,6 @@
 "use client";
+
+import * as React from "react";
 import { ThemeToggle } from "@components/ThemeToggle";
 import { ContextMenu } from "@components/ContextMenu";
 import { cn } from "@utils/cn";
@@ -16,11 +18,15 @@ const navItems = [
   },
 ];
 
-export const Navbar = () => {
+export const Navbar = ({
+  contextMenu = <ContextMenu />,
+}: {
+  contextMenu?: React.ReactNode;
+}) => {
   const pathname = usePathname();
   const basePath = pathname.match(/^\/[^/]+/)?.at(0) ?? "/";
   return (
-    <div className="border-b border-border  flex items-center justify-center relative">
+    <div className="border-b border-border flex items-center justify-center relative">
       <div
         style={{
           position: "absolute",
@@ -50,11 +56,9 @@ export const Navbar = () => {
                 <li>{label}</li>
               </Link>
             ))}
+            {contextMenu}
           </ul>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <ContextMenu />
-          </div>
+          <ThemeToggle />
         </div>
       </nav>
     </div>
