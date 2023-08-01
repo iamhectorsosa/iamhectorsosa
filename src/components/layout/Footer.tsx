@@ -28,6 +28,8 @@ export const Footer = () => {
         <ul className="flex md:items-center flex-col md:flex-row gap-x-4 gap-y-2 mt-1">
           {footerItems.map(({ href, label }) => (
             <a
+              target="_blank"
+              referrerPolicy="no-referrer"
               key={href}
               className="text-muted-foreground hover:text-foreground flex gap-x-2 items-center"
               href={href}
