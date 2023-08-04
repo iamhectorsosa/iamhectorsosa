@@ -1,8 +1,9 @@
-import { Navbar } from "@components/layout/Navbar";
-import "./globals.css";
-import { Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "@components/layout/Footer";
+import { Navbar } from "@components/layout/Navbar";
 import { ThemeProvider } from "@components/providers/ThemeProvider";
+import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
+
+import "./globals.css";
 
 const grotesk = Schibsted_Grotesk({
   subsets: ["latin"],

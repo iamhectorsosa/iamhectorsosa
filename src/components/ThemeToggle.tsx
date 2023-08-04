@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
-
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -10,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@components/ui/DropdownMenu";
 import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
