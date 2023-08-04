@@ -1,8 +1,8 @@
-import Image from "next/image";
+import { baseMetadata } from "@config/meta";
 import { getPost, getPosts } from "@lib/mdx";
 import dayjs from "dayjs";
 import { Metadata } from "next";
-import { baseMetadata } from "@config/meta";
+import Image from "next/image";
 
 export async function generateMetadata({
   params: { slug },
