@@ -8,8 +8,6 @@ const Sheet = SheetPrimitive.Root;
 
 const SheetTrigger = SheetPrimitive.Trigger;
 
-const SheetClose = SheetPrimitive.Close;
-
 const SheetPortal = ({
   className,
   ...props
@@ -47,12 +45,10 @@ const SheetContent = React.forwardRef<
       )}
       {...props}
     >
-      <div className="border-border px-4 pb-4 space-y-4 max-w-3xl mx-auto">
-        {children}
-      </div>
+      <div className="px-4 max-w-3xl mx-auto">{children}</div>
     </SheetPrimitive.Content>
   </SheetPortal>
 ));
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
-export { Sheet, SheetTrigger, SheetClose, SheetContent };
+export { Sheet, SheetContent, SheetTrigger };

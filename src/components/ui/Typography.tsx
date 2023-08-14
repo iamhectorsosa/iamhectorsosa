@@ -1,5 +1,5 @@
-import { cn } from "@utils/cn";
 import { ComponentPropsWithoutRef, forwardRef } from "react";
+import { cn } from "@utils/cn";
 
 const HeadingAnchor = (props: ComponentPropsWithoutRef<"a">) => {
   const { children, ...otherProps } = props;
@@ -275,16 +275,16 @@ const ProsePre = forwardRef<HTMLPreElement, ComponentPropsWithoutRef<"pre">>(
 ProsePre.displayName = "ProsePre";
 
 export {
+  ProseAnchor,
+  ProseBlockquote,
   ProseH1,
   ProseH2,
   ProseH3,
   ProseH4,
-  ProseP,
-  ProseStrong,
-  ProseAnchor,
-  ProseBlockquote,
-  ProseOL,
-  ProseUL,
   ProseInlineCode,
+  ProseOL,
+  ProseP,
   ProsePre,
+  ProseStrong,
+  ProseUL,
 };

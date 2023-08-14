@@ -1,29 +1,29 @@
 import {
+  ProseAnchor,
+  ProseBlockquote,
   ProseH1,
   ProseH2,
   ProseH3,
   ProseH4,
-  ProseP,
-  ProseStrong,
-  ProseAnchor,
-  ProseBlockquote,
-  ProseOL,
-  ProseUL,
   ProseInlineCode,
+  ProseOL,
+  ProseP,
   ProsePre,
+  ProseStrong,
+  ProseUL,
 } from "@components/ui/Typography";
-import { readFileSync, readdirSync, statSync } from "fs";
+import { readdirSync, readFileSync, statSync } from "fs";
 import {
+  compileMDX,
   CompileMDXResult,
   MDXRemoteProps,
-  compileMDX,
 } from "next-mdx-remote/rsc";
 import { join } from "path";
-import remarkToc, { Options as RemarkTocOptions } from "remark-toc";
 import rehypePrettyCode, {
   Options as RehypePrettyCodeOptions,
 } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
+import remarkToc, { Options as RemarkTocOptions } from "remark-toc";
 import { z } from "zod";
 
 // ⚙️ Config settings
