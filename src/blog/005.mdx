@@ -9,11 +9,11 @@ github: iamhectorsosa
 
 ## Introduction
 
-Shiki is arguably the most popular syntax highlighter out there. It uses [TextMate grammers](https://macromates.com/manual/en/language_grammars) to tokenize strings which then can be stylized using VS Code themes or CSS variables. Shiki is the way to go if you want your code to look exactly like that in VS Code.
+Shiki is arguably the most popular syntax highlighter out there. It uses [TextMate grammars](https://macromates.com/manual/en/language_grammars) to tokenize strings which then can be stylized using VS Code themes or CSS variables. Shiki is the way to go if you want your code to look exactly like that in VS Code.
 
 > Using Shiki is practical because as your favorite languages and themes evolve, your syntax highlighting will evolve as well.
 
-If you are here for the faster build times, go to [Faster build times](#faster-build-times). If you've never heard of or used Shiki before, here's a great introduction:
+If you are here for the faster build times, go to [faster build times](#faster-build-times). If you've never heard of or used Shiki before, here's a great introduction:
 
 ## How does it work?
 
@@ -150,7 +150,7 @@ A font pairing that I've enjoyed recently is [Schibsted Grotesk](https://fonts.g
 
 ## Faster build times
 
-Regardless of how you use Shiki, the more code you highlight, the more likely it is that you will run into performance issues. After testing, our team concluded that **creating Highlighter instances and loading languages are Shiki's the most resource-intensive operations**.
+Regardless of how you use Shiki, the more code you highlight, the more likely it is that you will run into performance issues. After testing, our team concluded that **(a) creating Highlighter instances, (b) loading languages, and (c) generating token-explanations are Shiki's most resource-intensive operations**.
 
 > You should make sure that the Highlighter instance is only created once, and that it is bootstrapped asynchronously before calling any of the exposed functions
 
@@ -159,12 +159,18 @@ Shiki provides you with the flexibility to create the implementations you need t
 Creating a caching system doesn't have to be overly complicated. By leveraging [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and abstracting the `getHighlighter` method, you can achieve this.
 
 ```ts
-import shiki, { type Highlighter } from "shiki";
+import shiki, { type Highlighter, type Theme, type Lang } from "shiki";
 
 // ✅ Use Map to store Highlighter instance promises
 const highlighterCache = new Map<string, Promise<Highlighter>>();
 
-export async function getHighlighter({ theme, langs }) {
+export async function getHighlighter({
+  theme,
+  langs,
+}: {
+  theme: Theme;
+  langs: Lang[];
+}) {
   // ✅ Generate identifiers for your instances, check and return if found
   const key = [theme, ...langs].join("-");
   const highlighter = highlighterCache.get(key);
@@ -178,14 +184,52 @@ export async function getHighlighter({ theme, langs }) {
 }
 ```
 
+### A word on Shiki's explanations
+
+Shiki's explanations are the biggest hidden bottleneck, though. Explanations are set to `false` if you are using the `codeToHtml` method, but if you are using `codeToThemedTokens` you'll find the option: `includeExplanation`, which is described as:
+
+> Whether to include an explanation of each token's matching scopes and why it's given its color. It defaults to false to reduce output verbosity.
+
+Interestingly enough, explanations are considered and included in the source code for both methods. They are exposed to the developer only with `codeToThemedTokens` and documented with a default value of `false`. However, **it turns out that the default value for this option is set to true**, so if performance is your concern and you do not need to make use of explanations, set this option to `false`.
+
+```js
+import { getHighlighter } from "@lib/shiki"; // Shiki Cache Abstraction
+import { renderToHTML, type Theme, type Lang } from "shiki";
+
+/** ✅ Config */
+const theme: Theme = "css-variables";
+const lang: Lang = "ts";
+
+const highlighter = await getHighlighter({
+  theme,
+  langs: [lang],
+});
+
+const code = `console.log("Here is your code.");`;
+
+// ✅ Avoid getting explanations if you do not need them
+const tokens = highlighter.codeToThemedTokens(code, lang, theme, {
+  includeExplanation: false,
+});
+
+const output = renderToHTML(tokens, {
+  elements: {
+    line({ children, className, index }) {
+      return `<span data-line=${index}
+        class=${className}>${children}</span>`;
+    },
+  },
+});
+```
+
 ## Final thoughts
 
 If you are using any flavor of markdown and do not need control over Shiki, plugins like [Rehype Pretty Code](https://github.com/atomiks/rehype-pretty-code), which integrate custom renders and caching systems, are excellent choices that align with the concepts explored in this article.
 
-This simple caching solution made our build times a remarkable **80% faster**. We tried various other suggestions, none worked as effectively as creating a caching system for Shiki Highlighter instances.
+This simple caching and setup solution made our build times a remarkable **80% faster**. We tried various other suggestions, none worked as effectively as creating a caching system for Shiki Highlighter instances.
 
 Here are a couple of things to keep in mind:
 
-- The keys used to identify instances is prone to duplicates if Highlighter instances are created using different aliases, i.e. `typescript` and `ts`. Check the Shiki's [language aliases](https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages) and make sure your team has a convention for their use.
+- The keys used to identify instances is prone to duplicates if Highlighter instances are created using different aliases, i.e. `typescript` and `ts`. Check Shiki's [language aliases](https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages) and make sure your team has a convention for their use.
 - You might not need to build your own caching system. If you aren't using Shiki directly, chances are that this has already been addressed by the libraries you're usingg.
 - Using Shiki in the browser might require a different approach, make sure to check [Shiki's architecture to learn more](https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages).
