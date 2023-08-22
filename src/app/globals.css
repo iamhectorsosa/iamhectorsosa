@@ -69,7 +69,8 @@ code {
 code > [data-line]::before {
   counter-increment: line;
   content: counter(line);
-  @apply inline-block w-4 mr-6 text-right text-muted-foreground;
+  color: var(--shiki-token-comment);
+  @apply inline-block w-4 mr-6 text-right;
 }
 
 code[data-line-numbers-max-digits="2"] > [data-line]::before {
@@ -78,28 +79,4 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
 
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   @apply w-12;
-}
-
-code > [data-highlighted-line] {
-  @apply bg-blue-200/50;
-}
-
-span[data-chars-id] {
-  @apply !font-semibold rounded p-0.5;
-}
-
-span[data-chars-id] > span {
-  @apply !text-inherit;
-}
-
-span[data-chars-id="red"] {
-  @apply bg-red-400/25 !text-red-800;
-}
-
-span[data-chars-id="yellow"] {
-  @apply bg-amber-400/25 !text-amber-800;
-}
-
-span[data-chars-id="blue"] {
-  @apply bg-sky-400/25 !text-sky-800;
 }
