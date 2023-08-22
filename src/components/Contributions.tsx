@@ -62,7 +62,7 @@ export const Contributions = async () => {
       }
         `,
       }),
-      next: { revalidate: 86400 },
+      next: { revalidate: 60 },
     }
   ).then((res) => res.json());
   const firstDate = data.user.contributionsCollection.contributionCalendar.weeks
