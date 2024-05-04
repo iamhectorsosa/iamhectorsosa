@@ -3,6 +3,10 @@ import Link from "next/link";
 
 const footerItems = [
   {
+    href: "/linkedin",
+    label: "LinkedIn",
+  },
+  {
     href: "/github",
     label: "Github",
   },

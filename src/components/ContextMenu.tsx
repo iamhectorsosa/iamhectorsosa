@@ -22,6 +22,10 @@ const navItems = [
 
 const footerItems = [
   {
+    href: "/linkedin",
+    label: "LinkedIn",
+  },
+  {
     href: "/github",
     label: "Github",
   },

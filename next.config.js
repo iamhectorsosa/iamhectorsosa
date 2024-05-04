@@ -3,6 +3,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/linkedin",
+        destination: "https://www.linkedin.com/in/iamhectorsosa",
+        permanent: true,
+      },
+      {
         source: "/github",
         destination: "https://github.com/iamhectorsosa",
         permanent: true,
