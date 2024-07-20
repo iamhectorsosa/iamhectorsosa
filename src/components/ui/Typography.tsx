@@ -26,7 +26,7 @@ const ProseH1 = React.forwardRef<
       id={id}
       className={cn(
         "scroll-m-9 text-4xl font-semibold tracking-tight",
-        className
+        className,
       )}
       ref={ref}
       {...otherProps}
@@ -52,7 +52,7 @@ const ProseH2 = React.forwardRef<
       id={id}
       className={cn(
         "scroll-m-9 text-3xl font-semibold tracking-tight",
-        className
+        className,
       )}
       ref={ref}
       {...otherProps}
@@ -78,7 +78,7 @@ const ProseH3 = React.forwardRef<
       id={id}
       className={cn(
         "scroll-m-9 text-2xl font-semibold tracking-tight",
-        className
+        className,
       )}
       ref={ref}
       {...otherProps}
@@ -104,7 +104,7 @@ const ProseH4 = React.forwardRef<
       id={id}
       className={cn(
         "scroll-m-9 text-xl font-semibold tracking-tight",
-        className
+        className,
       )}
       ref={ref}
       {...otherProps}
@@ -274,9 +274,9 @@ const ProsePre = (props: React.PropsWithChildren) => {
   return (
     <div className="relative border border-border rounded">
       <pre
+        {...otherProps}
         className="text-sm leading-normal py-5 overflow-x-scroll [&>code]:grid [&>code>span]:px-5"
         ref={preRef}
-        {...otherProps}
       >
         {children}
       </pre>

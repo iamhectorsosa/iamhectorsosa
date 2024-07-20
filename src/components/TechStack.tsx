@@ -6,13 +6,16 @@ import {
   SiBootstrap,
   SiChakraui,
   SiCss3,
+  SiDrizzle,
   SiExpress,
   SiFigma,
   SiFirebase,
   SiFramer,
   SiGithub,
+  SiGo,
   SiJavascript,
   SiJest,
+  SiLua,
   SiMarkdown,
   SiMdx,
   SiMongodb,
@@ -57,6 +60,12 @@ export const TechStack = () => {
         <Tooltip content="JavaScript" side="top">
           <SiJavascript />
         </Tooltip>
+        <Tooltip content="Go" side="top">
+          <SiGo />
+        </Tooltip>
+        <Tooltip content="Lua" side="top">
+          <SiLua />
+        </Tooltip>
       </div>
       <ProseH4>Frameworks, Platforms and Libraries</ProseH4>
       <div className="[&>svg]:w-9 [&>svg]:h-9 flex gap-x-6 gap-y-4 flex-wrap text-muted-foreground">
@@ -65,6 +74,9 @@ export const TechStack = () => {
         </Tooltip>
         <Tooltip content="Bootstrap" side="top">
           <SiBootstrap />
+        </Tooltip>
+        <Tooltip content="Drizzle" side="top">
+          <SiDrizzle />
         </Tooltip>
         <Tooltip content="Chakra UI" side="top">
           <SiChakraui />
