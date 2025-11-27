@@ -8,11 +8,8 @@ const Sheet = SheetPrimitive.Root;
 
 const SheetTrigger = SheetPrimitive.Trigger;
 
-const SheetPortal = ({
-  className,
-  ...props
-}: SheetPrimitive.DialogPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props} />
+const SheetPortal = ({ ...props }: SheetPrimitive.DialogPortalProps) => (
+  <SheetPrimitive.Portal {...props} />
 );
 SheetPortal.displayName = SheetPrimitive.Portal.displayName;
 
@@ -23,7 +20,7 @@ const SheetOverlay = React.forwardRef<
   <SheetPrimitive.Overlay
     className={cn(
       "fixed inset-x-0 top-0 h-full z-50 bg-black/90 backdrop-blur-sm",
-      className
+      className,
     )}
     {...props}
     ref={ref}
@@ -41,7 +38,7 @@ const SheetContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed z-50 bg-background inset-x-0 top-0 w-full",
-        className
+        className,
       )}
       {...props}
     >
