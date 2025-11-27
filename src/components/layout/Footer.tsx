@@ -11,10 +11,6 @@ const footerItems = [
     label: "Github",
   },
   {
-    href: "/twitter",
-    label: "Twitter",
-  },
-  {
     href: "/email",
     label: "Email",
   },

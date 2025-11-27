@@ -63,7 +63,7 @@ export const Contributions = async () => {
         `,
       }),
       next: { revalidate: 60 },
-    }
+    },
   ).then((res) => res.json());
   const firstDate = data.user.contributionsCollection.contributionCalendar.weeks
     .at(0)
@@ -83,7 +83,7 @@ export const Contributions = async () => {
       percentage: Math.floor(
         (data.user.contributionsCollection.totalCommitContributions /
           totalContributions) *
-          100
+          100,
       ),
     },
     {
@@ -92,7 +92,7 @@ export const Contributions = async () => {
       percentage: Math.floor(
         (data.user.contributionsCollection.totalIssueContributions /
           totalContributions) *
-          100
+          100,
       ),
     },
     {
@@ -101,7 +101,7 @@ export const Contributions = async () => {
       percentage: Math.floor(
         (data.user.contributionsCollection.totalPullRequestContributions /
           totalContributions) *
-          100
+          100,
       ),
     },
     {
@@ -111,7 +111,7 @@ export const Contributions = async () => {
       percentage: Math.floor(
         (data.user.contributionsCollection.totalPullRequestReviewContributions /
           totalContributions) *
-          100
+          100,
       ),
     },
     {
@@ -120,7 +120,7 @@ export const Contributions = async () => {
       percentage: Math.floor(
         (data.user.contributionsCollection.totalRepositoryContributions /
           totalContributions) *
-          100
+          100,
       ),
     },
   ];
@@ -133,7 +133,7 @@ export const Contributions = async () => {
             data.user.contributionsCollection.contributionCalendar
               .totalContributions
           }{" "}
-          contributions in the last year
+          public contributions in the last year
         </p>
         {firstDate && (
           <p className="text-muted-foreground text-sm">
@@ -153,7 +153,7 @@ export const Contributions = async () => {
                     side="top"
                   >
                     <div
-                      className="aspect-square dark:invert border border-transparent hover:border-background"
+                      className="aspect-square dark:invert border border-background/15 dark:border-background/15 hover:border-background"
                       style={{
                         backgroundColor: days.color,
                       }}
@@ -161,7 +161,7 @@ export const Contributions = async () => {
                   </Tooltip>
                 ))}
               </div>
-            )
+            ),
           )}
         </div>
         <a

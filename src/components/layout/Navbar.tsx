@@ -1,30 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { ContextMenu } from "@components/ContextMenu";
 import { ThemeToggle } from "@components/ThemeToggle";
-import { cn } from "@utils/cn";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const navItems = [
-  {
-    href: "/",
-    label: "Home",
-  },
-  {
-    href: "/blog",
-    label: "Blog",
-  },
-];
-
-export const Navbar = ({
-  contextMenu = <ContextMenu />,
-}: {
-  contextMenu?: React.ReactNode;
-}) => {
-  const pathname = usePathname();
-  const basePath = pathname.match(/^\/[^/]+/)?.at(0) ?? "/";
+export const Navbar = () => {
   return (
     <>
       <div className="relative z-50 h-24 w-full">
@@ -44,24 +24,7 @@ export const Navbar = ({
         <Link href="/">
           <h1 className="font-semibold text-2xl tracking-tight">Hector Sosa</h1>
         </Link>
-        <div className="flex justify-between items-center gap-x-2 md:gap-x-4">
-          <ul className="hidden md:flex justify-between items-center gap-x-4">
-            {navItems.map(({ href, label }) => (
-              <Link
-                key={href}
-                className={cn(
-                  "text-muted-foreground hover:underline underline-offset-8 hover:text-foreground",
-                  basePath === href && "text-foreground"
-                )}
-                href={href}
-              >
-                <li>{label}</li>
-              </Link>
-            ))}
-          </ul>
-          <ThemeToggle />
-          <span className="inline-flex md:hidden">{contextMenu}</span>
-        </div>
+        <ThemeToggle />
       </nav>
     </>
   );

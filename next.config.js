@@ -13,11 +13,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/twitter",
-        destination: "https://twitter.com/iamhectorsosa",
-        permanent: true,
-      },
-      {
         source: "/email",
         destination: "mailto:hello@hectorsosa.me",
         permanent: true,
