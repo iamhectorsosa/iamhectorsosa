@@ -1,13 +1,10 @@
 # Welcome
 
-Msc. Project Management and UI Engineer based in Prague Czech Republic, <a href="https://youtu.be/KPH9Al69680">made in Honduras</a>.
+Full Stack Engineer with 5+ years specializing in React, TypeScript, and Go. Expert in legacy modernization and developer tooling. Builds scalable, well-tested solutions that improve performance and reduce operational costs.
 
-Currently working as a Senior React TypeScript Developer at <a href="https://webscope.io"> Webscope </a>.
+## Contact
 
-### Contact
-
-- Website: https://hectorsosa.me
+- Website: <https://hectorsosa.me>
 - LinkedIn: [@iamhectorsosa](https://hectorsosa.me/linkedin)
 - GitHub: [@iamhectorsosa](https://hectorsosa.me/github)
-- Twitter: [@iamhectorsosa](https://hectorsosa.me/twitter)
 - E-mail: [hello@hectorsosa.me](https://hectorsosa.me/email)
